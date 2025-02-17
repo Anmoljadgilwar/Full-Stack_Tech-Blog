@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 
 const App = () => {
-  console.log(import.meta.env.VITE_TECHBLOG_APPWRITE);
+  // console.log(import.meta.env.VITE_TECHBLOG_APPWRITE);
 
   return (
     <>

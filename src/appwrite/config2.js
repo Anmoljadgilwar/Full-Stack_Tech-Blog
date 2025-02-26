@@ -4,8 +4,8 @@ import { Client, ID, Databases, Storage, Query } from "appwrite";
 export class Service {
   client = new Client();
 
-  Databases;
-  Buckets;
+  Databases; //Handles CRUD operations on documents.
+  Buckets; //Handles file uploads and deletions.
   constructor() {
     this.client
       .setEndpoint(config.appwriteUrl)
@@ -20,7 +20,7 @@ export class Service {
       return await this.Databases.createDocument(
         config.appwriteDatabaseId,
         config.appwriteCollectionId,
-        slug,
+        slug, // Using slug as document ID
         {
           Title,
 
@@ -80,6 +80,7 @@ export class Service {
   }
 
   async getPosts(queries = [Query.equal("status", "active")]) {
+    //"Query.equal" Finds documents where a field matches a specific value.
     try {
       return await this.Databases.listDocuments(
         config.appwriteDatabaseId,

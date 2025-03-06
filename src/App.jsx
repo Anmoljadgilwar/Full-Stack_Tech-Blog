@@ -4,26 +4,23 @@ import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
 import { Header, Footer } from "./components/index";
 import "./App.css";
+import { Outlet } from "react-router-dom";
 
-const App = () => {
-  // console.log(import.meta.env.VITE_TECHBLOG_APPWRITE);
+function App() {
   const [loading, setLoading] = useState(true);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      authService
-        .getCurrentUser()
-        .then((userData) => {
-          if (userData) {
-            dispatch(login({ userData }));
-          } else {
-            dispatch(logout());
-          }
-        })
-        .finally()
-    );
+    authService
+      .getCurrentUser()
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }));
+        } else {
+          dispatch(logout());
+        }
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   return !loading ? (
@@ -31,17 +28,12 @@ const App = () => {
       <div className="w-full block">
         <Header />
         <main>
-          {" "}
           TODO: <Outlet />
         </main>
         <Footer />
       </div>
     </div>
   ) : null;
-};
+}
 
 export default App;
-
-//  <button onClick={() => setCount((val) => val + 1)}>
-// count is {count}
-// </button>

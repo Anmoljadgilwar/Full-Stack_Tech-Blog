@@ -1,7 +1,7 @@
 import React from "react";
 
 const Select = ({ options, label, className = "", ...props }, ref) => {
-  //
+  //// Select dropdown component
   return (
     <div className="w-full">
       {label && (

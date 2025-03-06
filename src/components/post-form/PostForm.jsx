@@ -92,14 +92,19 @@ const PostForm = () => {
 
   return (
     <>
+      {/* Form to create or update a post */}
       <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+        {/* Left section: Title, Slug, and Content fields */}
         <div className="w-2/3 px-2">
+          {/* Title input field */}
           <Input
             label="Title :"
             placeholder="Title"
             className="mb-4"
             {...register("title", { required: true })}
           />
+
+          {/* Slug input field - automatically transforms based on the title */}
           <Input
             label="Slug :"
             placeholder="Slug"
@@ -111,6 +116,8 @@ const PostForm = () => {
               });
             }}
           />
+
+          {/* Rich Text Editor for post content */}
           <RTE
             label="Content :"
             name="content"
@@ -118,14 +125,19 @@ const PostForm = () => {
             defaultValue={getValues("content")}
           />
         </div>
+
+        {/* Right section: Image upload, status selection, and submit button */}
         <div className="w-1/3 px-2">
+          {/* File input for uploading a featured image */}
           <Input
             label="Featured Image :"
             type="file"
             className="mb-4"
             accept="image/png, image/jpg, image/jpeg, image/gif"
-            {...register("image", { required: !post })}
+            {...register("image", { required: !post })} // Required if creating a new post
           />
+
+          {/* Display the current featured image when editing a post */}
           {post && (
             <div className="w-full mb-4">
               <img
@@ -135,18 +147,22 @@ const PostForm = () => {
               />
             </div>
           )}
+
+          {/* Dropdown select for post status (active/inactive) */}
           <Select
             options={["active", "inactive"]}
             label="Status"
             className="mb-4"
             {...register("status", { required: true })}
           />
+
+          {/* Submit button: changes color if updating an existing post */}
           <Button
             type="submit"
-            bgColor={post ? "bg-green-500" : undefined}
+            bgColor={post ? "bg-green-500" : undefined} // Green button for updating
             className="w-full"
           >
-            {post ? "Update" : "Submit"}
+            {post ? "Update" : "Submit"} {/* Text changes based on action */}
           </Button>
         </div>
       </form>

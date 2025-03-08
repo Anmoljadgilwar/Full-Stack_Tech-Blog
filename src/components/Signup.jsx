@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
 import authService from "../appwrite/auth";
 import { Button, Input, Logo } from "./index";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -62,7 +61,7 @@ const Signup = () => {
                 {...register("name")}
               />
               <Input
-                label="Email: "
+                label="Email:"
                 type="email"
                 placeholder="Enter your email"
                 {...register("email", {
@@ -76,7 +75,7 @@ const Signup = () => {
                 })}
               />
               <Input
-                label="Password: "
+                label="Password:"
                 type="password"
                 placeholder="Enter your password"
                 {...register("password")}

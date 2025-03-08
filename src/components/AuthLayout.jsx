@@ -7,17 +7,17 @@ export default function Protected({ children, authentication = true }) {
   const [loader, setLoader] = useState(true);
   const authStatus = useSelector((state) => state.auth.status);
 
-  useEffect(() => {
-    if (authentication && !authStatus !== authentication) {
-      navigate("/login");
-    } else if (!authentication && authStatus !== authentication) {
-      navigate("/");
-    }
-    setLoader(false);
-  }, [authStatus, navigate, authentication]);
+  // useEffect(() => {
+  //   if (authentication && !authStatus !== authentication) {
+  //     navigate("/login");
+  //   } else if (!authentication && authStatus !== authentication) {
+  //     navigate("/");
+  //   }
+  //   setLoader(false);
+  // }, [authStatus, navigate, authentication]);
 
   //
-  //In Easy way 1
+  // In Easy way 1
   // if (authStatus === true) {
   //   navigate("/");
   // }else if(authStatus === false){
@@ -25,12 +25,12 @@ export default function Protected({ children, authentication = true }) {
   // }
 
   //In Easy way2
-  //useEffect(() => {
-  //    if (authentication !== authStatus) {
-  //       navigate(authentication ? "/" : "/login");
-  //    }
-  //    setLoader(false);
-  // }, [authStatus, navigate, authentication]);
+  useEffect(() => {
+    if (authentication !== authStatus) {
+      navigate(authentication ? "/" : "/login");
+    }
+    setLoader(false);
+  }, [authStatus, navigate, authentication]);
 
   //easy way 3
   //let authValue = authStatus === true ? true : false;
